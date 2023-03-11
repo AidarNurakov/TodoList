@@ -11,16 +11,16 @@ export class TodosService {
     @InjectRepository(Todo) private readonly todoRepository: Repository<Todo>,
   ) {}
 
-  async createTodo(createTodoDto: CreateTodoDto) {
+  public async createTodo(createTodoDto: CreateTodoDto) {
     const newTodo = this.todoRepository.create(createTodoDto);
     return this.todoRepository.save(newTodo);
   }
 
-  async findAllTodos() {
+  public async findAllTodos() {
     return this.todoRepository.find();
   }
 
-  async findOneTodo(id: number) {
+  public async findOneTodo(id: number) {
     const todo = await this.todoRepository.findOneBy({ id });
     if (!todo) {
       throw new NotFoundException('Todo not found');
@@ -28,7 +28,7 @@ export class TodosService {
     return todo;
   }
 
-  async updateTodo(id: number, updateTodoDto: UpdateTodoDto) {
+  public async updateTodo(id: number, updateTodoDto: UpdateTodoDto) {
     const updatedTodo = await this.todoRepository.update(id, updateTodoDto);
     if (!updatedTodo.affected) {
       throw new NotFoundException('Todo not found');
@@ -36,7 +36,7 @@ export class TodosService {
     return updatedTodo;
   }
 
-  async removeTodo(id: number) {
+  public async removeTodo(id: number) {
     const removedTodo = await this.todoRepository.delete(id);
     if (!removedTodo.affected) {
       throw new NotFoundException('Todo not found');

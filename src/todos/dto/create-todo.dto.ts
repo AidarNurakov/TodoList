@@ -1,1 +1,3 @@
-export class CreateTodoDto {}
+export class CreateTodoDto {
+  todoContent: string;
+}

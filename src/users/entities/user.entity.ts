@@ -1,27 +1,31 @@
-import { User } from '../../users/entities/user.entity';
+import { Todo } from '../../todos/entities/todo.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
-export class Todo {
+export class User {
   @PrimaryGeneratedColumn('identity', {
     generatedIdentity: 'ALWAYS',
   })
   id: number;
 
   @Column()
-  todoContent: string;
+  username: string;
 
-  @JoinColumn()
-  @ManyToOne(() => User, (user) => user.todos)
-  user: User;
+  @Column()
+  email: string;
+
+  @Column()
+  password: string;
+
+  @OneToMany(() => Todo, (todo) => todo.user)
+  todos: Todo[];
 
   @CreateDateColumn()
   createdAt: Date;

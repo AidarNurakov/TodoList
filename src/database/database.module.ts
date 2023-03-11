@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ConfigService } from '@nestjs/config/dist';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Todo } from 'src/todos/entities/todo.entity';
+import { User } from 'src/users/entities/user.entity';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { Todo } from 'src/todos/entities/todo.entity';
         username: configService.get('DATABASE_USER'),
         password: configService.get('DATABASE_PASSWORD'),
         database: configService.get('DATABASE_NAME'),
-        entities: [Todo],
+        entities: [Todo, User],
         autoLoadEntities: false,
       }),
     }),

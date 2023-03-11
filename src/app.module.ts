@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TodosModule } from './todos/todos.module';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config/dist';
+import { UsersModule } from './users/users.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -18,6 +19,7 @@ import * as Joi from 'joi';
     }),
     TodosModule,
     DatabaseModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],

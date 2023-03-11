@@ -39,7 +39,6 @@ export class AuthService {
     try {
       const user = await this.usersService.findByEmail(email);
       await this.verifyPassword(plainTextPassword, user.password);
-      user.password = undefined;
       return user;
     } catch (error) {
       throw new BadRequestException('Wrong credentials provided');

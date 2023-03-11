@@ -14,6 +14,7 @@ import { UpdateUserDto } from 'src/users/dto/update-user.dto';
 import { UsersService } from './users.service';
 
 @Controller('users')
+@UseGuards(JwtAuthGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -23,7 +24,6 @@ export class UsersController {
   }
 
   @Get()
-  @UseGuards(JwtAuthGuard)
   public findAll() {
     return this.usersService.findAllUsers();
   }

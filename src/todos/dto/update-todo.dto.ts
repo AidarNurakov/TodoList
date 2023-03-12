@@ -1,4 +1,9 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateTodoDto } from './create-todo.dto';
+import { ApiProperty } from '@nestjs/swagger';
 
-export class UpdateTodoDto extends PartialType(CreateTodoDto) {}
+export class UpdateTodoDto {
+  @ApiProperty({
+    example: 'go to the swimming pool',
+    description: 'content of todo task',
+  })
+  todoContent: string;
+}

@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+  server:
+    container_name: api-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    command: sh -c 'bin/wait-for.sh postgres-main:5432 -- npm run typeorm:run-migrations && npm run start'
+    volumes:
+      - .:/usr/server
+      - app-node-modules:/usr/server/node_modules
+      - app-cache:/usr/server/tmp
+    env_file:
+      - docker.env
+    networks:
+        - api-line
+    depends_on:
+        - postgres
+  postgres:
+    container_name: postgres-main
+    image: postgres
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root1234
+      POSTGRES_DB: todo_list
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - api-line
+
+networks:
+  api-line:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  app-cache:
+  app-node-modules:
+

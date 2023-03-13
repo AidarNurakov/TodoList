@@ -62,7 +62,7 @@ export class AuthService {
     const payload: TokenPayload = { userId };
     const token = this.jwtService.sign(payload);
     return `Authentication=${token}; HttpOnly; Path=/; Max-Age=${this.configService.get(
-      'JWT_ACCESS_EXP',
+      'JWT_EXPIRES_IN',
     )}`;
   }
 
